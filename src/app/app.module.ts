@@ -15,6 +15,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ModelModule } from './model/model.module';
+import { RouterModule } from '@angular/router';
+import { StoreComponent } from './model/store/store.component';
+import { CartDetailComponent } from './model/cart-detail/cart-detail.component';
+import { CheckoutComponent } from './model/checkout/checkout.component';
+import { StoreFirstGuard } from './model/guards/store-first.guard';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent
@@ -23,14 +29,22 @@ import { ModelModule } from './model/model.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     MatButtonModule, MatToolbarModule, MatIconModule, MatBadgeModule,
     MatTableModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
     MatSlideToggleModule,
-    ModelModule
+    ModelModule,
+    RouterModule.forRoot([
+      {path:"store",component:StoreComponent,canActivate:[StoreFirstGuard]},
+      {path:"cart",component:CartDetailComponent,canActivate:[StoreFirstGuard]},
+      {path:"checkout",component:CheckoutComponent,canActivate:[StoreFirstGuard]},
+      {path:"**",redirectTo:'/store'}
+    ])
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    StoreFirstGuard
   ],
   bootstrap: [AppComponent]
 })
