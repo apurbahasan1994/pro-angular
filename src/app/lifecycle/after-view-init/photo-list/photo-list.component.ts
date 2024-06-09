@@ -14,10 +14,10 @@ class SelectedComponent {
 export class PhotoListComponent implements AfterContentInit {
   private _componentEvents$ = new Subscription();
   ngAfterContentInit(): void {
+    this.handlePhotoComponentEvents(this.photoComponents);
     this.photoComponents.changes.subscribe((queryList: QueryList<PhotoComponent>) => {
       this.handlePhotoComponentEvents(queryList);
     });
-    this.handlePhotoComponentEvents(this.photoComponents);
   }
   handlePhotoSelection(photoCom: PhotoComponent, currIndex: number, eventType: PhotoEventType) {
     // for getting the previosuly selected componet if there is any
@@ -32,7 +32,7 @@ export class PhotoListComponent implements AfterContentInit {
         this.currentlySelectedComponent = new SelectedComponent(photoCom, currIndex);
         return;
       case PhotoEventType.REMOVE:
-        if (prevSelectedComponent && index !== currIndex) {
+        if (prevSelectedComponent && index === currIndex) {
           this.currentlySelectedComponent = new SelectedComponent();
         }
 
