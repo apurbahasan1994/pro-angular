@@ -1,0 +1,6 @@
+<section class="photo" [class.selected]="selected" (click)="onSelectPhoto($event)">
+    <h3>{{photo?.name}}</h3>
+    <img [src]="photo?.src">
+    <div>{{photo?.created}}</div>
+    <button (click)="onPhotoRemove($event)">Remove</button>
+</section>

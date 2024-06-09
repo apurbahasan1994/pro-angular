@@ -1,0 +1,3 @@
+<app-photo-list>
+    <app-photo *ngFor="let photo of photos" [photo]="photo" (onSelect)="onSelect($event)" (onRemove)="onRemove($event)"></app-photo>
+</app-photo-list>

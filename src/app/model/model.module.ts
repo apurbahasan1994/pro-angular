@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Order } from '../../core/data/order.model';
 import { RestDataSource } from '../../core/data/rest.datasource';
+import { AuthService } from '../../core/data/auth.service';
 
 
 
@@ -34,7 +35,9 @@ import { RestDataSource } from '../../core/data/rest.datasource';
   providers: [ProductRepository, StaticDataSource, Cart, OrderRepository, Order,
     {
       provide: StaticDataSource, useClass: RestDataSource
-    }
+    },
+    RestDataSource,
+    AuthService
   ]
 })
 export class ModelModule { }

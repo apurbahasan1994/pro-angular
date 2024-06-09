@@ -1,0 +1,9 @@
+<section class="photo__container">
+    <div class="buttons">
+        <button class="prev" (click)="changePhoto(-1,$event)">Prev</button>
+        <button class="next" (click)="changePhoto(1,$event)">Next</button>
+    </div>
+    <div style="display: flex">
+        <ng-content></ng-content>
+    </div>
+</section>

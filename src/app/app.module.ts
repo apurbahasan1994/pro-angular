@@ -21,9 +21,11 @@ import { CartDetailComponent } from './model/cart-detail/cart-detail.component';
 import { CheckoutComponent } from './model/checkout/checkout.component';
 import { StoreFirstGuard } from './model/guards/store-first.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { LifecycleModule } from './lifecycle/lifecycle.module';
+import { AfterViewInitComponent } from './lifecycle/after-view-init/after-view-init/after-view-init.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,11 +37,15 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule, MatCheckboxModule, MatFormFieldModule, MatInputModule,
     MatSlideToggleModule,
     ModelModule,
+    LifecycleModule,
     RouterModule.forRoot([
-      {path:"store",component:StoreComponent,canActivate:[StoreFirstGuard]},
-      {path:"cart",component:CartDetailComponent,canActivate:[StoreFirstGuard]},
-      {path:"checkout",component:CheckoutComponent,canActivate:[StoreFirstGuard]},
-      {path:"**",redirectTo:'/store'}
+      { path: "store", component: StoreComponent, canActivate: [StoreFirstGuard] },
+      { path: "cart", component: CartDetailComponent, canActivate: [StoreFirstGuard] },
+      { path: "checkout", component: CheckoutComponent, canActivate: [StoreFirstGuard] },
+      { path: 'admin', loadChildren: () => import("./admin/admin.module").then(m => m.AdminModule) },
+      { path: 'after-view-init', component: AfterViewInitComponent },
+      { path: "**", redirectTo: '/store' },
+
     ])
   ],
   providers: [
